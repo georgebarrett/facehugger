@@ -47,3 +47,17 @@ def the_bridge():
         return redirect(url_for(result["scene"]))
 
     return render_template('the_bridge.html', result=result)
+
+@app.route('/escape_pod', methods=['GET', 'POST'])
+def escape_pod():
+    pod = EscapePod()
+    if request.method == 'POST':
+        guess = request.form.get('pod_number')
+        result = pod.enter(guess)
+    else:
+        result = pod.enter()
+
+    if result["scene"] != "escape_pod":
+        return redirect(url_for(result["scene"]))
+
+    return render_template('escape_pod.html', result=result)
