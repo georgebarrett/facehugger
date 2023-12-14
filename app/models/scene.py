@@ -145,5 +145,7 @@ class EscapePod(Scene):
 class Finished(Scene):
     
     def enter(self):
-        print('You made it!')
-        return 'finished'
+        return {
+            "scene": "finished",
+            "message": "You made it!"
+        }
