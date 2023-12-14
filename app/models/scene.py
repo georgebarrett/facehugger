@@ -207,3 +207,9 @@ class EscapePod(Scene):
             '''))
 
             return 'finished'
+        
+class Finished(Scene):
+    
+    def enter(self):
+        print('You made it!')
+        return 'finished'
