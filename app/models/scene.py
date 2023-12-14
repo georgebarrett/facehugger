@@ -58,7 +58,7 @@ class CentralCorridor(Scene):
 class LaserWeaponArmory(Scene):
     
     def enter(self, guess=None):
-        code = f'{randint(1,3)}{randint(1,3)}{randint(1,3)}'
+        code = f'{randint(1,9)}{randint(1,9)}{randint(1,9)}'
         
         if guess is None:
             return {
