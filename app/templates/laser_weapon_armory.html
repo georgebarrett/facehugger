@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laser Weapon Armory</title>
+</head>
+<body>
+    <h1>Laser Weapon Armory</h1>
+    <p>{{ result.message }}</p>
+    <form method="post">
+        <input type="text" name="guess" placeholder="Enter code">
+        <input type="submit" value="Submit">
+        <p>Attempts remaining: {{ result.attempts_remaining }}</p>
+    </form>
+    {% if result.code_feedback %}
+        <ul>
+        {% for digit, is_correct in result.code_feedback %}
+            <li>{{ digit }} - {% if is_correct %} Correct {% else %} Incorrect {% endif %}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
