@@ -61,3 +61,9 @@ def escape_pod():
         return redirect(url_for(result["scene"]))
 
     return render_template('escape_pod.html', result=result)
+
+@app.route('/finished')
+def finished():
+    finish_scene = Finished()
+    result = finish_scene.enter()
+    return render_template('finished.html', result=result)
