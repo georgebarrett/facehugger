@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Central Corridor</title>
+</head>
+<body>
+    <p>
+        "You hear the sound of your hibernation pod opening and drowsily clamber out. 
+        You vomit all over the floor and then start to callibrate with reality. A scan of the ship is necessary to make sure that everything is in order and that the cargo is safe. 
+        You enter into the cargo room, relieved to finally be off the mining planet 31-XCT. Something catches your eye. You rub your eyes to make sure you aren't hallucinating. 
+        A metalic slimy egg is in the corner of the bay. You walk over to inspect the anomaly. As you get closer, you see something move inside. You pull out your laser gun and approach with caution. 
+        When you reach the mysterious egg, the top begins to fold open.
+    </p>
+    <form method="post">
+        <input type="submit" name="action" value="shoot">
+        <input type="submit" name="action" value="dodge">
+        <input type="submit" name="action" value="tell a joke">
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
