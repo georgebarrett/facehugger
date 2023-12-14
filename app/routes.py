@@ -16,3 +16,18 @@ def central_corridor():
         return redirect(url_for(result['scene']))
     
     return render_template('central_corridor.html', result=result)
+
+@app.route('/laser_weapon_armory', methods=['GET', 'POST'])
+def laser_weapon_armory():
+    armory = LaserWeaponArmory()
+
+    if request.method == 'POST':
+        guess = request.form.get('guess')
+        result = armory.enter(guess)
+    else:
+        result = armory.enter()
+    
+    if result['scene'] != 'laser_weapon_armory':
+        return redirect(url_for(result['scene']))
+    
+    return render_template('laser_weapon_armory.html', result=result)
