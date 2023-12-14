@@ -1,12 +1,14 @@
 from flask import Flask
 from .engine import Map, Engine
+from .routes import setup_routes
 
 app = Flask(__name__)
 
+setup_routes(app)
+
 @app.route('/play')
 def play_game():
-    a_map = Map('central_corridor')
-    a_game = Engine(a_map)
-    game_output = a_game.play()
-
     return 'the game has begun'
+
+if __name__ == "__main__":
+    app.run(debug=True)
