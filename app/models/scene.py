@@ -57,46 +57,37 @@ class CentralCorridor(Scene):
 
 class LaserWeaponArmory(Scene):
     
-    def enter(self):
-        print(('''
-            You do a dive roll into the Weapon Armory, crouch and scan
-            the room for more Gothons that might be hiding. It's
-            quiet, too quiet. You stand up and run to the far side of
-            the room and find the neutron bomb in its container.
-            There's a keypad lock on the box and you need the code to
-            get the bomb out. If you get the code wrong 10 times then
-            the lock closes forever and you can't get the bomb. The
-            code is 3 digits long and the keypad has the numbers 1 to 3.
-        '''))
-
+    def enter(self, guess=None):
         code = f'{randint(1,3)}{randint(1,3)}{randint(1,3)}'
-        guess = input('[keypad]> ')
-        guesses = 0
-
-        while guess != code and guesses < 10:
-            print('[BZZZZZEDDDDDD!]')
-            guesses += 1
-            guess = input('[keypad]> ')
+        
+        if guess is None:
+            return {
+                "scene": "laser_weapon_armory",
+                "message": "You do a dive roll into the Weapon Armory, crouch and scan the room for more Gothons that might be hiding. It's quiet, too quiet. You stand up and run to the far side of the room and find the neutron bomb in its container. There's a keypad lock on the box and you need the code to get the bomb out. The code is 3 digits long and the keypad has the numbers 1 to 3.",
+                "prompt": "Enter the code:",
+                "attempts_remaining": 10  # initial number of attempts
+            }
 
         if guess == code:
-            print(('''
-                The container clicks open and the seal breaks, letting
-                gas out. You grab the neutron bomb and run as fast as
-                you can to the bridge where you must place it in the
-                right spot.
-            '''))
-
-            return 'the_bridge'
-
+            return {
+                "scene": "the_bridge",
+                "message": "The container clicks open and the seal breaks, letting gas out. You grab the neutron bomb and run as fast as you can to the bridge where you must place it in the right spot."
+            }
         else:
-            print(('''
-                The lock buzzes one last time and then you hear a
-                sickening melting sound as the mechanism is fused
-                together. You decide to sit there, and finally the
-                Gothons return to their ship and fire the torpedoes.
-            '''))
-
-            return 'death'
+            # Decrease the number of attempts left and provide feedback
+            attempts_left = 10 - len(guess)  # assuming guess is a list of attempts
+            if attempts_left > 0:
+                return {
+                    "scene": "laser_weapon_armory",
+                    "message": "BZZZZZEDDDDDD! The code is incorrect.",
+                    "prompt": "Enter the code:",
+                    "attempts_remaining": attempts_left
+                }
+            else:
+                return {
+                    "scene": "death",
+                    "message": "The lock buzzes one last time and then you hear a sickening melting sound as the mechanism is fused together. You decide to sit there, and finally the Gothons return to their ship and fire the torpedoes."
+                }
 
 class TheBridge(Scene):
     
