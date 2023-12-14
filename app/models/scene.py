@@ -63,7 +63,7 @@ class LaserWeaponArmory(Scene):
         if guess is None:
             return {
                 "scene": "laser_weapon_armory",
-                "message": "You dive roll into the Lasor Amory. You are dripping in sweat and are drowning in adrenaline. Quickly close and lock all the doors. You reach the last door and it is jammed. A code needs to be entered into the door's keypad to force it shut. What is the code! You know it! Come on! As your hand touches the key pad you hear a noise coming from the end of the corridor. The facehugger has found you and is scurrying as fast as it can. The facehugger is hell bent on laying an egg inside you. You have ten attempts to close the door. the code is four digits long and the keypad range is 1-9.",
+                "message": "You dive roll into the Lasor Amory. You are dripping in sweat and are drowning in adrenaline. Quickly close and lock all the doors. You reach the last door and it is jammed. A code needs to be entered into the door's keypad to force it shut. What is the code! You know it! Come on! As your hand touches the key pad you hear a noise coming from the end of the corridor. The facehugger has found you and is scurrying as fast as it can. The facehugger is hell bent on laying an egg inside you. You have ten attempts to close the door. the code is three digits long and the keypad range is 1-9.",
                 "prompt": "Enter the code:",
                 "attempts_remaining": 10  # initial number of attempts
             }
