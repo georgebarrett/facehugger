@@ -26,33 +26,33 @@ class CentralCorridor(Scene):
         if action is None:
             return {
                 "scene": "central_corridor",
-                "message": "The Gothons of Planet Percal #25 have invaded your ship and destroyed your entire crew. You are the last surviving member and your last mission is to get the neutron destruct bomb from the Weapons Armory, put it in the bridge, and blow the ship up after getting into an escape pod. You're running down the central corridor to the Weapons Armory when a Gothon jumps out, red scaly skin, dark grimy teeth, and lashing tail whipping around its hate filled body. It's blocking the door to the Armory and about to pull a weapon to blast you.",
-                "choices": ["shoot", "dodge", "tell a joke"]
+                "message": "You hear the sound of your hibernation pod opening and drowsily clamber out. You vomit all over the floor and then start to callibrate with reality. A scan of the ship is necessary to make sure that everything is in order and that the cargo is safe. You enter into the cargo room, relieved to finally be off the mining planet 31-XCT. Something catches your eye. You rub your eyes to make sure you aren't hallucinating. A metalic slimy egg is in the corner of the bay. You walk over to inspect the anomaly. As you get closer, you see something move inside. You pull out your laser gun and approach with caution. When you reach the mysterious egg, the top begins to fold open.",
+                "choices": ["shoot", "run", "inspect"]
             }
 
         if action == 'shoot':
             return {
                 "scene": "death",
-                "message": "Quick on the draw you yank out your blaster and fire it at the Gothon. Its snapping tail and metalic scales disorientate you, which throws off your aim. Your laser hits its tails but misses its body. This completely ruins its glamorous and deadly tail, which makes it fly into an insane rage and blast you repeatedly in the face until you are dead. Then he eats you."
+                "message": "You run over to the egg and fire your laser gun at the creature inside. When the laser hits the alien, acid sprays all over your head. You scream and writhe around on the floor before turning into a headless corspe."
             }
 
-        elif action == 'dodge':
+        elif action == 'run':
             return {
                 "scene": "death",
-                "message": "Like a world class boxer you dodge, weave, slip and slide right as the Gothon's blaster cranks a laser past your head. In the middle of your artful dodge your foot slips and you bang your head on the metal wall and pass out. You wake up shortly after only to die as the Gothon stomps on your head and eats you."
+                "message": "Fear takes over and you sprint out of the cargo bay. You run to where your crew are still in hibernation and try to wake them up. As you approach their pods, you see that all of your crew mates have spider like aliens wrapped around their faces. You stagger back in shock. What was that... you turn around and the facehugger leaps onto you. You feel its legs wrap around your head, tail tighten around your neck and then an alien tube enters your mouth. You pass out."
             }
 
-        elif action == 'tell a joke':
+        elif action == 'inspect':
             return {
                 "scene": "laser_weapon_armory",
-                "message": "Lucky for you they made you learn Gothon insults in the academy. You tell the one Gothon joke you know: Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf nebhaq gur ubhfr. The Gothon stops, tries not to laugh, then busts out laughing and can't move. While it's laughing you run up and shoot it square in the head putting it down, then jump through the Weapon Armory door."
+                "message": "You keep edging towards the slimy metalic egg. You peer inside the egg, laser gun shaking in your hand. You see a spider like alien begin to emerge from the egg. Its time to think fast. Where can you hide and stay safe. You remember the Lasor Amory can be totally sealed off and begin sprinting towards it"
             }
 
         else:
             return {
                 "scene": "central_corridor",
                 "message": "DOES NOT COMPUTE! Try again.",
-                "choices": ["shoot", "dodge", "tell a joke"]
+                "choices": ["shoot", "run", "inspect"]
             }
 
 class LaserWeaponArmory(Scene):
@@ -63,7 +63,7 @@ class LaserWeaponArmory(Scene):
         if guess is None:
             return {
                 "scene": "laser_weapon_armory",
-                "message": "You do a dive roll into the Weapon Armory, crouch and scan the room for more Gothons that might be hiding. It's quiet, too quiet. You stand up and run to the far side of the room and find the neutron bomb in its container. There's a keypad lock on the box and you need the code to get the bomb out. The code is 3 digits long and the keypad has the numbers 1 to 3.",
+                "message": "You dive roll into the Lasor Amory. You are dripping in sweat and are drowning in adrenaline. Quickly close and lock all the doors. You reach the last door and it is jammed. A code needs to be entered into the door's keypad to force it shut. What is the code! You know it! Come on! As your hand touches the key pad you hear a noise coming from the end of the corridor. The facehugger has found you and is scurrying as fast as it can. The facehugger is hell bent on laying an egg inside you. You have ten attempts to close the door. the code is four digits long and the keypad range is 1-9.",
                 "prompt": "Enter the code:",
                 "attempts_remaining": 10  # initial number of attempts
             }
@@ -71,7 +71,7 @@ class LaserWeaponArmory(Scene):
         if guess == code:
             return {
                 "scene": "the_bridge",
-                "message": "The container clicks open and the seal breaks, letting gas out. You grab the neutron bomb and run as fast as you can to the bridge where you must place it in the right spot."
+                "message": "The door slams shut and a milisecond later the facehugger smashes against the reinforced glass. You sit in corner of the armory rocking backwards and forwards. It dawns on you that you will die in this room. You need to get to The Bridge and activate the escape pods. You look up and see a vent cover. You blast the cover off and climb up. You start crawling along the vent shaft towards The Bridge. Hold on... If I can fit up here, then so can that alien. Don't think, MOVE"
             }
         else:
             # Decrease the number of attempts left and provide feedback
@@ -86,7 +86,7 @@ class LaserWeaponArmory(Scene):
             else:
                 return {
                     "scene": "death",
-                    "message": "The lock buzzes one last time and then you hear a sickening melting sound as the mechanism is fused together. You decide to sit there, and finally the Gothons return to their ship and fire the torpedoes."
+                    "message": "You entered the code for the last time. The door is fixed open. The facehugger scuttles into the armory. You unload your laser gun but can't hit the sporadic target. The facehugger leaps up. You feel its legs wrap around your face, tail tighten around your neck and then an alien tube enter your mouth. You wake up eight hours later with a dead facehugger next to you. The relief is palapable. That evening you are making yourself a cup of tea when you hear the first crunch of your chest bones breaking."
                 }
 
 class TheBridge(Scene):
@@ -95,27 +95,27 @@ class TheBridge(Scene):
         if action is None:
             return {
                 "scene": "the_bridge",
-                "message": "You burst onto the Bridge with the neutron destruct bomb under your arm and surprise 5 Gothons who are trying to take control of the ship. They haven't fired their weapons yet, as they can see the active bomb under your arm. You have two options: Throw the bomb at the Gothons and run for the escape pods, or slowly place the bomb on the floor and edge towards the pods with your gun pointed towards the explosive device.",
-                "choices": ["throw the bomb", "slowly place the bomb"]
+                "message": "You crawl through the vent shafts for what feels like eternity. You are covered in sweat and stink of fear. After three hours of scrabbling along vents, you reach The Bridge. You blast a vent cover off and then jump down. There, before you, is a metalic alien monstrosity. Its forehead is long and its metalic skin reflects the clinical lights of The Bridge. The alien is eight feet tall and is connected to some sort of organic sack. You realise that this alien is a queen and she is laying eggs. You stand there in horror at the sight of her. Your jaw drops as you see that Earth is not far away. The alien screams and prepares to fight. She detaches herself from her sack, her tail is lashing and her tongue is out. You freeze and can't decide what to do. Do you shoot the alien or run to the control panel to activate the escape pods. You scream.",
+                "choices": ["shoot", "activate the escape pods"]
             }
 
-        if action == 'throw the bomb':
+        if action == 'shoot':
             return {
                 "scene": "death",
-                "message": "In a panic you throw the bomb at the group of Gothons and make a leap for the door. Right as you drop it a Gothon shoots you right in the back killing you. As you die you see another Gothon frantically try to disarm the bomb. You die knowing they will probably blow up when it goes off."
+                "message": "You unload your laser gun into the alien queen. Acid sprays all over your body and you can feel it burning through you. The Queen picks you up with her metalic arms. she looks at you sqaure in face. She can sense you fear and wants to bask in it. Once she is satisfied she launches her tongue into your head"
             }
 
-        elif action == 'slowly place the bomb':
+        elif action == 'activate the escape pods':
             return {
                 "scene": "escape_pod",
-                "message": "You point your blaster at the bomb under your arm and the Gothons put their hands up and start to sweat. You inch backward to the door, open it, and then carefully place the bomb on the floor, pointing your blaster at it. You then jump back through the door, punch the close button and blast the lock so the Gothons can't get out. Now that the bomb is placed you run to the escape pod to get off this tin can."
+                "message": "You fire your laser gun at the fire detectors. Loud noises and flashing lights fill the spaceship. The Queen is disorientated. You sprint to the control panel and activate the escape pods. You begin to run to the pods but then realise that the Queen will land on Earth. You sprint back and activate the self-destruct sequence"
             }
 
         else:
             return {
                 "scene": "the_bridge",
                 "message": "DOES NOT COMPUTE! Try again.",
-                "choices": ["throw the bomb", "slowly place the bomb"]
+                "choices": ["shoot", "activate the escape pods"]
             }
         
 class EscapePod(Scene):
@@ -126,20 +126,20 @@ class EscapePod(Scene):
         if guess is None:
             return {
                 "scene": "escape_pod",
-                "message": "You rush through the ship desperately trying to make it to the escape pod before the whole ship explodes. It seems like hardly any Gothons are on the ship, so your run is clear of interference. You get to the chamber with the escape pods, and now need to pick one to take. Some of them could be damaged but you don't have time to look. There are 5 pods, which one do you take?",
+                "message": "You rush through the ship desperately trying to make it to the escape pod before the whole ship explodes or the Queen tears you apart. You reach the pods but can't remember which one you activated. Which one will you choose. You only have time to pick one. The Queen is rampaging towards you.",
                 "pod_numbers": range(1, 6)  # Generate pod numbers 1 to 5
             }
 
         if int(guess) != good_pod:
             return {
                 "scene": "death",
-                "message": f"You jump into pod {guess} and hit the eject button. The pod escapes out into the void of space, then implodes as the hull ruptures, crushing your body into jam jelly."
+                "message": f"You jump into pod {guess} and hit the eject button. Nothing happens. The Queen reaches you and you pass out from fear. You come around and are plastered to a wall with an unknown alien goo. You can't move and no one can hear you scream. You look down and see an egg slowly open. The facehugger knows its prey is helpless. It slowly crawls out of the egg and up your body. You feel its legs wrap around your face, tail tighten around your neck and a slimey alien tube enter your mouth."
             }
         
         else:
             return {
                 "scene": "finished",
-                "message": f"You jump into pod {guess} and hit the eject button. The pod easily slides out into space heading to the planet below. As it flies to the planet, you look back and see your ship implode and then explode like a bright star, taking out the Gothon ship at the same time. You made it out alive!"
+                "message": f"You jump into pod {guess} and hit the eject button. The pod easily slides out into space heading to the Earth. As it flies to our home planet, you look back and see your ship implode and then explode like a bright star. You breathe deeply and your body turns to jelly. You survived. WHAT... you look out of the window and see another escape pod heading to earth. You check the computer system and an alien life form is detected in the other pod. Over the next twenty years humanity will be eradicated"
             }
         
 class Finished(Scene):
