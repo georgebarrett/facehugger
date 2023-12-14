@@ -91,49 +91,32 @@ class LaserWeaponArmory(Scene):
 
 class TheBridge(Scene):
     
-    def enter(self):
-        print(('''
-            You burst onto the Bridge with the netron destruct bomb
-            under your arm and surprise 5 Gothons who are trying to
-            take control of the ship. They haven't fired their weapons 
-            yet, as they can see the active bomb under your arm. You 
-            have two options. Throw the bomb at the Gothons and run 
-            for the escape pods, or slowly place the bomb on the floor 
-            and edge towards the pods with your gun pointed towards 
-            the explosive device. 
-        '''))
-
-        action = input("['throw the bomb' or 'slowly place the bomb']> ")
+    def enter(self, action=None):
+        if action is None:
+            return {
+                "scene": "the_bridge",
+                "message": "You burst onto the Bridge with the neutron destruct bomb under your arm and surprise 5 Gothons who are trying to take control of the ship. They haven't fired their weapons yet, as they can see the active bomb under your arm. You have two options: Throw the bomb at the Gothons and run for the escape pods, or slowly place the bomb on the floor and edge towards the pods with your gun pointed towards the explosive device.",
+                "choices": ["throw the bomb", "slowly place the bomb"]
+            }
 
         if action == 'throw the bomb':
-            print(('''
-                In a panic you throw the bomb at the group of Gothons
-                and make a leap for the door. Right as you drop it a
-                Gothon shoots you right in the back killing you. As
-                you die you see another Gothon frantically try to
-                disarm the bomb. You die knowing they will probably
-                blow up when it goes off.
-            '''))
-
-            return 'death'
+            return {
+                "scene": "death",
+                "message": "In a panic you throw the bomb at the group of Gothons and make a leap for the door. Right as you drop it a Gothon shoots you right in the back killing you. As you die you see another Gothon frantically try to disarm the bomb. You die knowing they will probably blow up when it goes off."
+            }
 
         elif action == 'slowly place the bomb':
-            print(('''
-                You point your blaster at the bomb under your arm and
-                the Gothons put their hands up and start to sweat.
-                You inch backward to the door, open it, and then
-                carefully place the bomb on the floor, pointing your
-                blaster at it. You then jump back through the door,
-                punch the close button and blast the lock so the
-                Gothons can't get out. Now that the bomb is placed
-                you run to the escape pod to get off this tin can.
-            '''))
-
-            return 'escape_pod'
+            return {
+                "scene": "escape_pod",
+                "message": "You point your blaster at the bomb under your arm and the Gothons put their hands up and start to sweat. You inch backward to the door, open it, and then carefully place the bomb on the floor, pointing your blaster at it. You then jump back through the door, punch the close button and blast the lock so the Gothons can't get out. Now that the bomb is placed you run to the escape pod to get off this tin can."
+            }
 
         else:
-            print('DOES NOT COMPUTE!')
-            return 'the_bridge'
+            return {
+                "scene": "the_bridge",
+                "message": "DOES NOT COMPUTE! Try again.",
+                "choices": ["throw the bomb", "slowly place the bomb"]
+            }
         
 class EscapePod(Scene):
     
