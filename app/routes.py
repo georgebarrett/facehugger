@@ -17,6 +17,7 @@ def central_corridor():
     
     return render_template('central_corridor.html', result=result)
 
+
 @app.route('/laser_weapon_armory', methods=['GET', 'POST'])
 def laser_weapon_armory():
     armory = LaserWeaponArmory()
@@ -31,3 +32,18 @@ def laser_weapon_armory():
         return redirect(url_for(result['scene']))
     
     return render_template('laser_weapon_armory.html', result=result)
+
+
+@app.route('/the_bridge', methods=['GET', 'POST'])
+def the_bridge():
+    bridge = TheBridge()
+    if request.method == 'POST':
+        action = request.form.get('action')
+        result = bridge.enter(action)
+    else:
+        result = bridge.enter()
+    
+    if result["scene"] != "the_bridge":
+        return redirect(url_for(result["scene"]))
+
+    return render_template('the_bridge.html', result=result)
