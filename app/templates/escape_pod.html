@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Escape Pod</title>
+</head>
+<body>
+    <h1>Escape Pod</h1>
+    <p>{{ result.message }}</p>
+    
+    <form method="post">
+        {% for num in result.pod_numbers %}
+            <input type="submit" name="pod_number" value="{{ num }}">
+        {% endfor %}
+    </form>
+
+    {% if result.additional_info %}
+        <p>{{ result.additional_info }}</p>
+    {% endif %}
+</body>
+</html>
