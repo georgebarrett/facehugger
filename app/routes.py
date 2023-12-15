@@ -41,11 +41,13 @@ def setup_routes(app):
         if request.method == 'POST':
             action = request.form.get('action')
             result = bridge.enter(action)
+            if result['scene'] == 'death':
+                return redirect(url_for('death', message=result['message']))
+            elif result["scene"] != "the_bridge":
+                return redirect(url_for(result["scene"]))
+        
         else:
             result = bridge.enter()
-        
-        if result["scene"] != "the_bridge":
-            return redirect(url_for(result["scene"]))
 
         return render_template('the_bridge.html', result=result)
 
