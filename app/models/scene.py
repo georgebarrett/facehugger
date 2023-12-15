@@ -52,7 +52,7 @@ class LaserWeaponArmory(Scene):
     def enter(self, guess=None):
         if 'armory_code' not in session:  
             session['armory_code'] = f'{randint(1,9)}{randint(1,9)}{randint(1,9)}'
-            session['attempts_remaining'] = 10
+            session['attempts_remaining'] = 20
 
         code = session['armory_code']
         
@@ -98,6 +98,7 @@ class LaserWeaponArmory(Scene):
                     "message": "You entered the code for the last time. The door is fixed open. The facehugger scuttles into the armory. You unload your laser gun but can't hit the sporadic target. The facehugger leaps up. You feel its legs wrap around your face, tail tighten around your neck and then an alien tube enter your mouth. You wake up eight hours later with a dead facehugger next to you. The relief is palapable. That evening you are making yourself a cup of tea when you hear the first crunch of your chest bones breaking."
                 }
 
+
 class TheBridge(Scene):
     
     def enter(self, action=None):
@@ -136,19 +137,19 @@ class EscapePod(Scene):
             return {
                 "scene": "escape_pod",
                 "message": "You rush through the ship desperately trying to make it to the escape pod before the whole ship explodes or the Queen tears you apart. You reach the pods but can't remember which one you activated. Which one will you choose. You only have time to pick one. The Queen is rampaging towards you.",
-                "pod_numbers": range(1, 6)  # Generate pod numbers 1 to 5
+                "pod_numbers": range(1, 6)
             }
 
-        if int(guess) != good_pod:
+        if int(guess) == good_pod:
             return {
-                "scene": "death",
-                "message": f"You jump into pod {guess} and hit the eject button. Nothing happens. The Queen reaches you and you pass out from fear. You come around and are plastered to a wall with an unknown alien goo. You can't move and no one can hear you scream. You look down and see an egg slowly open. The facehugger knows its prey is helpless. It slowly crawls out of the egg and up your body. You feel its legs wrap around your face, tail tighten around your neck and a slimey alien tube enter your mouth."
+                "scene": "finished",
+                "message": f"You jump into pod {guess} and hit the eject button. The pod easily slides out into space heading to the Earth. As it flies to our home planet, you look back and see your ship implode and then explode like a bright star. You breathe deeply and your body turns to jelly. You survived. WHAT... you look out of the window and see another escape pod heading to earth. You check the computer system and an alien life form is detected in the other pod. Over the next twenty years humanity will be eradicated."
             }
         
         else:
             return {
-                "scene": "finished",
-                "message": f"You jump into pod {guess} and hit the eject button. The pod easily slides out into space heading to the Earth. As it flies to our home planet, you look back and see your ship implode and then explode like a bright star. You breathe deeply and your body turns to jelly. You survived. WHAT... you look out of the window and see another escape pod heading to earth. You check the computer system and an alien life form is detected in the other pod. Over the next twenty years humanity will be eradicated"
+                "scene": "death",
+                "message": f"You jump into pod {guess} and hit the eject button. Nothing happens. The Queen reaches you and you pass out from fear. You come around and are plastered to a wall with an unknown alien goo. You can't move and no one can hear you scream. You look down and see an egg slowly open. The facehugger knows its prey is helpless. It slowly crawls out of the egg and up your body. You feel its legs wrap around your face, tail tighten around your neck and a slimey alien tube enter your mouth."
             }
         
 class Finished(Scene):
