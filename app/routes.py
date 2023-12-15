@@ -9,11 +9,12 @@ def setup_routes(app):
         if request.method == 'POST':
             action = request.form.get('action')
             result = central_corridor_scene.enter(action)
+            if result['scene'] == 'death':
+                return redirect(url_for('death', message=result['message']))
+            elif result['scene'] == 'laser_weapon_armory':
+                return redirect(url_for('laser_weapon_armory'))
         else:
             result = central_corridor_scene.enter()
-
-        if result['scene'] != 'central_corridor':
-            return redirect(url_for(result['scene']))
         
         return render_template('central_corridor.html', result=result)
 
@@ -67,3 +68,8 @@ def setup_routes(app):
         finish_scene = Finished()
         result = finish_scene.enter()
         return render_template('finished.html', result=result)
+    
+    @app.route('/death')
+    def death():
+        message = request.args.get('message', 'You have died.')
+        return render_template('death.html', message=message)
