@@ -1,4 +1,5 @@
 from random import randint
+from flask import Flask, session
 
 class Scene:
     def enter(self):
@@ -58,40 +59,49 @@ class CentralCorridor(Scene):
 class LaserWeaponArmory(Scene):
     
     def enter(self, guess=None):
-        code = f'{randint(1,9)}{randint(1,9)}{randint(1,9)}'
+        if 'armory_code' not in session:  
+            session['armory_code'] = f'{randint(1,9)}{randint(1,9)}{randint(1,9)}'
+            session['attempts_remaining'] = 10
+
+        code = session['armory_code']
         
         if guess is None:
             return {
                 "scene": "laser_weapon_armory",
                 "message": "You dive roll into the Lasor Amory. You are dripping in sweat and are drowning in adrenaline. Quickly close and lock all the doors. You reach the last door and it is jammed. A code needs to be entered into the door's keypad to force it shut. What is the code! You know it! Come on! As your hand touches the key pad you hear a noise coming from the end of the corridor. The facehugger has found you and is scurrying as fast as it can. The facehugger is hell bent on laying an egg inside you. You have ten attempts to close the door. the code is three digits long and the keypad range is 1-9.",
                 "prompt": "Enter the code:",
-                "attempts_remaining": 10,
+                "attempts_remaining": session['attempts_remaining'],
                 "code_feedback": []
             }
         
         feedback = []
         for i in range(len(guess)):
-            if i < len(code) and guess[i] == code[i]:
-                feedback.append((guess[i], True))
+            if i < len(code):
+                correct = guess[i] == code[i]
+                feedback.append({'digit': guess[i], 'correct': correct})
             else:
-                feedback.append((guess[i], False))
+                feedback.append({'digit': '', 'correct': False})
 
         if guess == code:
+            session.pop('armory_code', None)
+            session.pop('attempts_remaining', None)
             return {
                 "scene": "the_bridge",
                 "message": "The door slams shut and a milisecond later the facehugger smashes against the reinforced glass. You sit in corner of the armory rocking backwards and forwards. It dawns on you that you will die in this room. You need to get to The Bridge and activate the escape pods. You look up and see a vent cover. You blast the cover off and climb up. You start crawling along the vent shaft towards The Bridge. Hold on... If I can fit up here, then so can that alien. Don't think, MOVE"
             }
         else:
-            # Decrease the number of attempts left and provide feedback
-            attempts_left = 10 - len(guess)  # assuming guess is a list of attempts
-            if attempts_left > 0:
+            session['attempts_remaining'] -= 1 
+            if session['attempts_remaining'] > 0:
                 return {
                     "scene": "laser_weapon_armory",
                     "message": "BZZZZZEDDDDDD! The code is incorrect.",
                     "prompt": "Enter the code:",
-                    "attempts_remaining": attempts_left
+                    "attempts_remaining": session['attempts_remaining'],
+                    "code_feedback": feedback
                 }
             else:
+                session.pop('armory_code', None)
+                session.pop('attempts_remaining', None)
                 return {
                     "scene": "death",
                     "message": "You entered the code for the last time. The door is fixed open. The facehugger scuttles into the armory. You unload your laser gun but can't hit the sporadic target. The facehugger leaps up. You feel its legs wrap around your face, tail tighten around your neck and then an alien tube enter your mouth. You wake up eight hours later with a dead facehugger next to you. The relief is palapable. That evening you are making yourself a cup of tea when you hear the first crunch of your chest bones breaking."
