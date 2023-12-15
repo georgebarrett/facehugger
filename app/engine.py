@@ -1,4 +1,4 @@
-from .models.scene import Death, CentralCorridor, LaserWeaponArmory, TheBridge, EscapePod, Finished
+from .models.scene import CentralCorridor, LaserWeaponArmory, TheBridge, EscapePod, Finished
 
 class Engine(object):
     def __init__(self, scene_map):
@@ -21,7 +21,6 @@ class Map(object):
         'laser_weapon_armory':LaserWeaponArmory(),
         'the_bridge':TheBridge(),
         'escape_pod':EscapePod(),
-        'death':Death(),
         'finished':Finished(),
     }
 
