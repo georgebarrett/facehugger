@@ -4,7 +4,7 @@ from .models.scene import CentralCorridor, LaserWeaponArmory, TheBridge, EscapeP
 def setup_routes(app):
     @app.route('/')
     def home():
-        return render_template('home.html')
+        return redirect(url_for('central_corridor'))
 
     @app.route('/central_corridor', methods=['GET', 'POST'])
     def central_corridor():
